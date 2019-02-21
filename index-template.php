@@ -377,89 +377,77 @@ get_header(); ?>
                 <?php
                 $args = array(
                     'category_name' => 'book-reviews',
-                    'posts_per_page' => 1,
-                );
-                $args2 = array(
-                    'category_name' => 'book-reviews',
-                    'posts_per_page' => 5,
-                    'offset' => 1,
+                    'posts_per_page' => '5',
                 );
                 // запрос
-                $query = new WP_Query($args); ?>
-                <div class="header-blog-left div66">
+                $query = new WP_Query($args);
+                $i = 0;
 
-                    <?php
-                    // Цикл
+                // Цикл
+                if ($query->have_posts()) {
                     while ($query->have_posts()) {
+                        $query->the_post();
 
-                    $query->the_post(); ?>
-
-                    <div class="row">
-                        <div class="bg-shadow">
-                            <div class="div60">
-                                <a href="<?php echo get_permalink() ?>" class="blog-featured-img">
-                                    <img src="<?php echo the_post_thumbnail(); ?>">
-                                </a>
-                            </div>
-                            <div class="div40 bs-pad20">
-                                <div class="date"><?php the_time('F j, Y') ?></div>
-                                <h3>
-                                    <a href="<?php echo get_permalink() ?>"
-                                       class="blog-title">
-                                        <?php echo wp_trim_words(get_the_title(), 5); ?>
-                                    </a>
-                                </h3>
-                                <p><?php echo wp_trim_words(get_the_content(), 25); ?></p>
-                                <div class="button-holder text-center">
-                                    <a href="<?php echo esc_url(get_permalink()) ?>"
-                                       class="btn-gren-bg">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            <?php
-            }
-
-            wp_reset_postdata();
-
-            // Второй запрос (без глобальной переменной)
-            $query2 = new WP_Query($args2); ?>
-                <div class="block-list header-blog-right div33">
-                    <?php
-                    // 2-й Цикл
-                    while ($query2->have_posts()) {
-
-                        $query2->the_post(); ?>
-                        <div class="belowheader-blog-right">
-                            <div class="row">
-                                <ul class="related-post bs">
-                                    <li>
-                                        <div class="related-featured-img">
-                                            <a href="<?php echo get_permalink() ?>">
-                                                <img width="81" height="81"
-                                                     src="<?php echo the_post_thumbnail(); ?>" </a>
+                        if ($i == 0) { ?>
+                            <div class="header-blog-left div66">
+                                <div class="row">
+                                    <div class="bg-shadow">
+                                        <div class="div60">
+                                            <a href="<?php echo get_permalink() ?>" class="blog-featured-img">
+                                                <img src="<?php echo the_post_thumbnail(); ?>">
+                                            </a>
                                         </div>
-                                        <div class="related-featured-title">
+                                        <div class="div40 bs-pad20">
                                             <div class="date"><?php the_time('F j, Y') ?></div>
                                             <h3>
-                                                <a href="<?php echo get_permalink() ?>">
-                                                    <?php echo wp_trim_words(get_the_title(), 4); ?>                                    </a>
+                                                <a href="<?php echo get_permalink() ?>"
+                                                   class="blog-title">
+                                                    <?php echo wp_trim_words(get_the_title(), 5); ?>
+                                                </a>
                                             </h3>
-                                            <p><?php the_excerpt(); ?></p>
+                                            <p><?php echo wp_trim_words(get_the_content(), 25); ?></p>
+                                            <div class="button-holder text-center">
+                                                <a href="<?php echo esc_url(get_permalink()) ?>"
+                                                   class="btn-gren-bg">Read more</a>
+                                            </div>
                                         </div>
-                                    </li>
-                                </ul>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <?php
+                            <?php $i++; ?>
+                            <div class="block-list header-blog-right div33">
+                            <?php
+                        } elseif ($i > 0) { ?>
+                            <div class="belowheader-blog-right">
+                                    <div class="row">
+                                        <ul class="related-post bs">
+                                            <li>
+                                                <div class="related-featured-img">
+                                                    <a href="<?php echo get_permalink() ?>">
+                                                        <img width="81" height="81"
+                                                             src="<?php echo the_post_thumbnail(); ?>" </a>
+                                                </div>
+                                                <div class="related-featured-title">
+                                                    <div class="date"><?php the_time('F j, Y') ?></div>
+                                                    <h3>
+                                                        <a href="<?php echo get_permalink() ?>">
+                                                            <?php echo wp_trim_words(get_the_title(), 4); ?> </a>
+                                                    </h3>
+                                                    <p><?php the_excerpt(); ?></p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            <?php
+                        }
                     }
-
-                    // Восстанавливаем оригинальные данные поста
-                    wp_reset_postdata();
-                    ?>
-                </div>
+                } else {
+                        // Постов не найдено
+                    }?>
+                            </div>
+            <?php // Возвращаем оригинальные данные поста. Сбрасываем $post.
+                wp_reset_postdata(); ?>
             </div>
         <div class="space-60"></div>
         <div class="wrapper">

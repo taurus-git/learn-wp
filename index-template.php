@@ -388,58 +388,13 @@ get_header(); ?>
                     while ($query->have_posts()) {
                         $query->the_post();
 
-                        if ($i == 0) { ?>
-                            <div class="header-blog-left div66">
-                                <div class="row">
-                                    <div class="bg-shadow">
-                                        <div class="div60">
-                                            <a href="<?php echo get_permalink() ?>" class="blog-featured-img">
-                                                <img src="<?php echo the_post_thumbnail(); ?>">
-                                            </a>
-                                        </div>
-                                        <div class="div40 bs-pad20">
-                                            <div class="date"><?php the_time('F j, Y') ?></div>
-                                            <h3>
-                                                <a href="<?php echo get_permalink() ?>"
-                                                   class="blog-title">
-                                                    <?php echo wp_trim_words(get_the_title(), 5); ?>
-                                                </a>
-                                            </h3>
-                                            <p><?php echo wp_trim_words(get_the_content(), 25); ?></p>
-                                            <div class="button-holder text-center">
-                                                <a href="<?php echo esc_url(get_permalink()) ?>"
-                                                   class="btn-gren-bg">Read more</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php $i++; ?>
+                        if ($i == 0) {
+                            get_template_part( 'index-parts/header-blog-left' );
+                            $i++; ?>
                             <div class="block-list header-blog-right div33">
                             <?php
-                        } elseif ($i > 0) { ?>
-                            <div class="belowheader-blog-right">
-                                    <div class="row">
-                                        <ul class="related-post bs">
-                                            <li>
-                                                <div class="related-featured-img">
-                                                    <a href="<?php echo get_permalink() ?>">
-                                                        <img width="81" height="81"
-                                                             src="<?php echo the_post_thumbnail(); ?>" </a>
-                                                </div>
-                                                <div class="related-featured-title">
-                                                    <div class="date"><?php the_time('F j, Y') ?></div>
-                                                    <h3>
-                                                        <a href="<?php echo get_permalink() ?>">
-                                                            <?php echo wp_trim_words(get_the_title(), 4); ?> </a>
-                                                    </h3>
-                                                    <p><?php the_excerpt(); ?></p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            <?php
+                        } elseif ($i > 0) {
+                            get_template_part( 'index-parts/header-blog-right' );
                         }
                     }
                 } else {

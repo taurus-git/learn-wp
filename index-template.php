@@ -123,105 +123,44 @@ get_header(); ?>
                     </div>
                 </div>
             </div>
-            <div class="cols-row">
-                <div class="header-blog-left div66">
-                    <div class="row">
-                        <div class="bg-shadow">
-                            <div class="div60">
-                                <a href="<?php echo get_site_url(); ?>/investing-6-books-in-1/" class="blog-featured-img">
-                                    <img src="<?php echo get_site_url(); ?>/wp-content/themes/learncfds/images/default-image.jpg" alt="Investing: 6 Books in 1">
-                                </a>
-                            </div>
-                            <div class="div40 bs-pad20">
-                                <div class="date">November 30, 2018</div>
-                                <h3>
-                                    <a href="<?php echo get_site_url(); ?>/investing-6-books-in-1/" class="blog-title">
-                                        Investing: 6 Books in 1
-                                    </a>
-                                </h3>
-                                <p>Investing: 6 Books in 1 (Stock Market Investing, Options Trading, Penny Stocks, Forex Trading, Real Estate Investing &amp; Rental Property Investing)&nbsp; By G. Smith Synopsis...</p>
-                                <div class="button-holder text-center">
-                                    <a href="<?php echo get_site_url(); ?>/investing-6-books-in-1/" class="btn-gren-bg">Read more</a>
+                <?php
+                $args = array(
+                    'posts_per_page' => '5',
+                    'order' => 'DESC',
+                    'orderby' => 'date',
+                );
+                // запрос
+                $query = new WP_Query($args);
+                $i = 0;
+
+                // Цикл
+                if ($query->have_posts()) {
+                    while ($query->have_posts()) {
+                        $query->the_post();
+
+                        if ($i == 0) { ?>
+                            <!--2 блока вверху-->
+                            <div class="cols-row">
+                                <?php get_template_part('index-parts/header-blog-left'); ?>
+                            <?php $i++;
+                        } elseif ($i == 1) { ?>
+                                <div class="header-blog-rightfour div33">
+                                    <?php get_template_part('index-parts/header-blog-rightfour'); ?>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="header-blog-rightfour div33">
-                    <div class="row">
-                        <div class="has-mask">
-                            <a href="<?php echo get_site_url(); ?>/what-effect-is-brexit-having-on-the-euro/" class="blog-featured-img">
-                                <img width="409" height="283" src="<?php echo get_site_url(); ?>/wp-content/uploads/2018/11/shutterstock_1151373788.jpg" class="attachment-409x348 size-409x348 wp-post-image" alt="brexit flag" srcset="<?php echo get_site_url(); ?>/wp-content/uploads/2018/11/shutterstock_1151373788.jpg 1000w, <?php echo get_site_url(); ?>/wp-content/uploads/2018/11/shutterstock_1151373788-300x208.jpg 300w, <?php echo get_site_url(); ?>/wp-content/uploads/2018/11/shutterstock_1151373788-768x531.jpg 768w" sizes="(max-width: 409px) 100vw, 409px">
-                            </a>
-                            <div class="hover-content">
-                                <div class="date">November 29, 2018</div>
-                                <h3>
-                                    <a href="<?php echo get_site_url(); ?>/what-effect-is-brexit-having-on-the-euro/" class="blog-title">
-                                        What effect is Brexit having on the euro?
-                                    </a>
-                                </h3>
-                                <p>Markets react to uncertainty by becoming volatile, and this has been playing out on the...</p>
-                                <div class="button-holder text-center">
-                                    <a href="<?php echo get_site_url(); ?>/what-effect-is-brexit-having-on-the-euro/" class="btn-gren-bg">Read more</a>
-                                </div>
+
+                            <!--3 блока снизу-->
+                            <div class="cols-row">
+                                <?php $i++;
+                         } elseif ($i > 1) {
+                            get_template_part('index-parts/header-blog-rightfour');
+                        }
+                    }
+                } else {
+                            // Постов не найдено
+                        }// Возвращаем оригинальные данные поста. Сбрасываем $post.
+                wp_reset_postdata(); ?>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="cols-row">
-                <div class="header-blog-rightfour rightfour-below div33">
-                    <div class="row">
-                        <div class="bg-shadow">
-                            <a href="<?php echo get_site_url(); ?>/news-trading-as-a-cfd-strategy/" class="blog-featured-img">
-                                <img width="409" height="196" src="<?php echo get_site_url(); ?>/wp-content/uploads/2018/11/LCFD-20181128-85x45.jpg" alt="News trading as a CFD strategy">
-                            </a>
-                            <div class="bs-pad20">
-                                <div class="date">November 28, 2018</div>
-                                <h3>
-                                    <a href="<?php echo get_site_url(); ?>/news-trading-as-a-cfd-strategy/" class="blog-title">
-                                        News trading as a CFD strategy									</a>
-                                </h3>
-                                <p>There are many CFD trading strategies that claim success, but learning which ones work and...</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="header-blog-rightfour rightfour-below div33">
-                    <div class="row">
-                        <div class="bg-shadow">
-                            <a href="<?php echo get_site_url(); ?>/what-coinmines-crypto-mining-products-mean-for-forex-traders/" class="blog-featured-img">
-                                <img width="409" height="196" src="<?php echo get_site_url(); ?>/wp-content/uploads/2018/11/LCFD-20181127-85x45.jpg" alt="What Coinmine’s crypto mining products mean for forex traders">
-                            </a>
-                            <div class="bs-pad20">
-                                <div class="date">November 28, 2018</div>
-                                <h3>
-                                    <a href="<?php echo get_site_url(); ?>/what-coinmines-crypto-mining-products-mean-for-forex-traders/" class="blog-title">
-                                        What Coinmine’s crypto mining products mean for forex traders									</a>
-                                </h3>
-                                <p>One of the unique selling points of cryptocurrencies is that the money’s production takes place...</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="header-blog-rightfour rightfour-below div33">
-                    <div class="row">
-                        <div class="bg-shadow">
-                            <a href="<?php echo get_site_url(); ?>/forex-trading-and-the-brexit-endgame/" class="blog-featured-img">
-                                <img width="409" height="196" src="<?php echo get_site_url(); ?>/wp-content/uploads/2018/11/LCFD-20181126-85x45.jpg" alt="Forex trading and the Brexit endgame">
-                            </a>
-                            <div class="bs-pad20">
-                                <div class="date">November 26, 2018</div>
-                                <h3>
-                                    <a href="<?php echo get_site_url(); ?>/forex-trading-and-the-brexit-endgame/" class="blog-title">
-                                        Forex trading and the Brexit endgame									</a>
-                                </h3>
-                                <p>The currency markets are, by definition, acutely responsive to international geopolitical interactions. When there are...</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="space-60"></div>
         <div class="top-articles wrapper">

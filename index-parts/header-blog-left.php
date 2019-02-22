@@ -3,7 +3,7 @@
         <div class="bg-shadow">
             <div class="div60">
                 <a href="<?php echo get_permalink() ?>" class="blog-featured-img">
-                    <img src="<?php echo the_post_thumbnail(); ?>">
+                   <img src="<?php echo the_post_thumbnail_url('large');?>" alt=<?php echo get_the_title() ?>>
                 </a>
             </div>
             <div class="div40 bs-pad20">

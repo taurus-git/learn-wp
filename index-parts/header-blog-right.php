@@ -4,8 +4,16 @@
             <li>
                 <div class="related-featured-img">
                     <a href="<?php echo get_permalink() ?>">
-                        <img width="81" height="81"
-                             src="<?php echo the_post_thumbnail(); ?>" </a>
+                        <?php
+                        $size = array(
+                            'width' => '112',
+                            'height' => '81'
+                        );
+                        $default_attr = array(
+                            'src' => wp_get_attachment_image_src(get_post_thumbnail_id(), 'thumbnail'),
+                        );
+                        echo the_post_thumbnail( $size, $default_attr ); ?>
+                    </a>
                 </div>
                 <div class="related-featured-title">
                     <div class="date"><?php the_time('F j, Y') ?></div>

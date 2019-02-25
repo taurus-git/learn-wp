@@ -187,28 +187,25 @@ get_header(); ?>
                     while ($query->have_posts()) {
                         $query->the_post();
 
-                        if ($i <= 1) {?>
+                        if ($i <= 1) { ?>
                             <div class="header-blog-right ipad-50 div33">
                                 <div class="header-blog-rightfour">
-                            <?php
-                            get_template_part( 'index-parts/header-blog-rightfour' );?>
+                                    <?php
+                                    get_template_part('index-parts/header-blog-rightfour'); ?>
                                 </div>
                             </div>
-                            <?php
-
-                        } elseif ($i == 2) { ?>
-                            <div class="block-list header-blog-right div33">
-                            <?php
-                            goto next_iteration;
+                        <?php
                         } else {
-                            next_iteration:
-                            get_template_part( 'index-parts/header-blog-right');
-                        } $i++;
+                            if ($i == 2) { ?>
+                                <div class="block-list header-blog-right div33">
+                            <?php
+                            } get_template_part( 'index-parts/header-blog-right');
 
-                    }?>
-                        </div>
+                        } $i++;?>
+
                     <?php
-                } ?>
+                    }
+                }  ?>
 
                 <?php
                 wp_reset_postdata(); ?>

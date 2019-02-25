@@ -142,7 +142,6 @@ get_header(); ?>
                             <div class="cols-row">
                                 <?php
                                 get_template_part('index-parts/header-blog-left');
-                                $i++;
                         } elseif ($i == 1) { ?>
                                 <div class="header-blog-rightfour div33">
                                     <?php
@@ -151,14 +150,13 @@ get_header(); ?>
                             </div>
 
                             <div class="cols-row">
-                                <?php $i++;
-                        } elseif ($i > 1) {
+                                <?php
+                        } else {
                             get_template_part('index-parts/rightfour-below');
                         }
+                        $i++;
                     }
-                } else {
-
-                        }
+                }
                 wp_reset_postdata(); ?>
                             </div>
         </div>
@@ -178,7 +176,7 @@ get_header(); ?>
                 $args = array(
                     'order' => 'DESC',
                     'orderby' => 'date',
-                    'posts_per_page' => '7', //posts to view - 6. Plus one unit due to the additional condition in the cycle (elseif ($i == 2) ... <div class="block-list header-blog-right div33">)
+                    'posts_per_page' => '6',
                     'offset'         => "5",
                 );
                 
@@ -189,28 +187,30 @@ get_header(); ?>
                     while ($query->have_posts()) {
                         $query->the_post();
 
-                        if ($i >= 0 && $i <= 1) {?>
+                        if ($i <= 1) {?>
                             <div class="header-blog-right ipad-50 div33">
                                 <div class="header-blog-rightfour">
                             <?php
                             get_template_part( 'index-parts/header-blog-rightfour' );?>
                                 </div>
                             </div>
-                            <?php $i++;
+                            <?php
+
                         } elseif ($i == 2) { ?>
                             <div class="block-list header-blog-right div33">
-                            <?php $i++;
-                        } elseif ($i >= 2) {
+                            <?php
+                            goto next_iteration;
+                        } else {
+                            next_iteration:
                             get_template_part( 'index-parts/header-blog-right');
-                        }
-                    }?>
-                            </div>
-                <?php
-                } else {
-                        
-                }?>
+                        } $i++;
 
-                <?php 
+                    }?>
+                        </div>
+                    <?php
+                } ?>
+
+                <?php
                 wp_reset_postdata(); ?>
             </div>
         </div>
@@ -241,17 +241,14 @@ get_header(); ?>
                         $query->the_post();
 
                         if ($i == 0) {
-                            get_template_part( 'index-parts/header-blog-left' );
-                            $i++; ?>
+                            get_template_part( 'index-parts/header-blog-left' ); ?>
                             <div class="block-list header-blog-right div33">
                             <?php
-                        } elseif ($i > 0) {
+                        } else {
                             get_template_part( 'index-parts/header-blog-right' );
-                        }
+                        } $i++;
                     }
-                } else {
-                        
-                    }?>
+                } ?>
                             </div>
             <?php 
                 wp_reset_postdata(); ?>

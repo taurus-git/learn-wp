@@ -129,36 +129,36 @@ get_header(); ?>
                     'order' => 'DESC',
                     'orderby' => 'date',
                 );
-                // запрос
+
                 $query = new WP_Query($args);
                 $i = 0;
 
-                // Цикл
                 if ($query->have_posts()) {
                     while ($query->have_posts()) {
                         $query->the_post();
 
                         if ($i == 0) { ?>
-                            <!--2 блока вверху-->
+
                             <div class="cols-row">
-                                <?php get_template_part('index-parts/header-blog-left'); ?>
-                            <?php $i++;
+                                <?php
+                                get_template_part('index-parts/header-blog-left');
+                                $i++;
                         } elseif ($i == 1) { ?>
                                 <div class="header-blog-rightfour div33">
-                                    <?php get_template_part('index-parts/header-blog-rightfour'); ?>
+                                    <?php
+                                    get_template_part('index-parts/header-blog-rightfour'); ?>
                                 </div>
                             </div>
 
-                            <!--3 блока снизу-->
                             <div class="cols-row">
                                 <?php $i++;
-                         } elseif ($i > 1) {
-                            get_template_part('index-parts/header-blog-rightfour');
+                        } elseif ($i > 1) {
+                            get_template_part('index-parts/rightfour-below');
                         }
                     }
                 } else {
-                            // Постов не найдено
-                        }// Возвращаем оригинальные данные поста. Сбрасываем $post.
+
+                        }
                 wp_reset_postdata(); ?>
                             </div>
         </div>
@@ -174,130 +174,44 @@ get_header(); ?>
                 </div>
             </div>
             <div class="cols-row">
-                <div class="header-blog-right ipad-50 div33">
-                    <div class="header-blog-rightfour">
-                        <div class="row">
-                            <div class="header-blog-rightfour-ct-1">
-                                <a href="<?php echo get_site_url(); ?>/how-well-does-technical-analysis-work/" class="blog-featured-img">
-                                    <img width="409" height="307" src="<?php echo get_site_url(); ?>/wp-content/uploads/2018/11/learncfed.jpg" class="attachment-409x351 size-409x351 wp-post-image" alt="Analysis" srcset="<?php echo get_site_url(); ?>/wp-content/uploads/2018/11/learncfed.jpg 1000w, <?php echo get_site_url(); ?>/wp-content/uploads/2018/11/learncfed-300x225.jpg 300w, <?php echo get_site_url(); ?>/wp-content/uploads/2018/11/learncfed-768x576.jpg 768w" sizes="(max-width: 409px) 100vw, 409px">							</a>
-                                <div class="hover-content">
-                                    <div class="date">November 9, 2018</div>
-                                    <h3>
-                                        <a href="<?php echo get_site_url(); ?>/how-well-does-technical-analysis-work/" class="blog-title">
-                                            How well does technical analysis work?									</a>
-                                    </h3>
-                                    <p>Many CFD traders believe that technical analysis is the key to profiting with online trading...</p>
-                                    <div class="button-holder text-center">
-                                        <a href="<?php echo get_site_url(); ?>/how-well-does-technical-analysis-work/" class="btn-gren-bg">Read more</a>
-                                    </div>
+                <?php
+                $args = array(
+                    'order' => 'DESC',
+                    'orderby' => 'date',
+                    'posts_per_page' => '7', //posts to view - 6. Plus one unit due to the additional condition in the cycle (elseif ($i == 2) ... <div class="block-list header-blog-right div33">)
+                    'offset'         => "5",
+                );
+                
+                $query = new WP_Query($args);
+                $i = 0;
+
+                if ($query->have_posts()) {
+                    while ($query->have_posts()) {
+                        $query->the_post();
+
+                        if ($i >= 0 && $i <= 1) {?>
+                            <div class="header-blog-right ipad-50 div33">
+                                <div class="header-blog-rightfour">
+                            <?php
+                            get_template_part( 'index-parts/header-blog-rightfour' );?>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="header-blog-right ipad-50 div33">
-                    <div class="header-blog-rightfour">
-                        <div class="row">
-                            <div class="header-blog-rightfour-ct-1">
-                                <a href="<?php echo get_site_url(); ?>/understanding-why-technical-indicators-fail/" class="blog-featured-img">
-                                    <img width="409" height="273" src="<?php echo get_site_url(); ?>/wp-content/uploads/2018/10/10.10.18-lcfdsnews1.jpg" class="attachment-409x351 size-409x351 wp-post-image" alt="" srcset="<?php echo get_site_url(); ?>/wp-content/uploads/2018/10/10.10.18-lcfdsnews1.jpg 1000w, <?php echo get_site_url(); ?>/wp-content/uploads/2018/10/10.10.18-lcfdsnews1-300x200.jpg 300w, <?php echo get_site_url(); ?>/wp-content/uploads/2018/10/10.10.18-lcfdsnews1-768x512.jpg 768w" sizes="(max-width: 409px) 100vw, 409px">							</a>
-                                <div class="hover-content">
-                                    <div class="date">October 10, 2018</div>
-                                    <h3>
-                                        <a href="<?php echo get_site_url(); ?>/understanding-why-technical-indicators-fail/" class="blog-title">
-                                            Understanding why technical indicators fail									</a>
-                                    </h3>
-                                    <p>Trading signals and indicators form part of the basis of technical analysis of trading trends...</p>
-                                    <div class="button-holder text-center">
-                                        <a href="<?php echo get_site_url(); ?>/understanding-why-technical-indicators-fail/" class="btn-gren-bg">Read more</a>
-                                    </div>
-                                </div>
+                            <?php $i++;
+                        } elseif ($i == 2) { ?>
+                            <div class="block-list header-blog-right div33">
+                            <?php $i++;
+                        } elseif ($i >= 2) {
+                            get_template_part( 'index-parts/header-blog-right');
+                        }
+                    }?>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="block-list header-blog-right div33">
-                    <div class="belowheader-blog-right">
-                        <div class="row">
-                            <ul class="related-post bs">
-                                <li>
-                                    <div class="related-featured-img">
-                                        <a href="<?php echo get_site_url(); ?>/trading-the-1-minute-scalping-strategy/">
-                                            <img width="81" height="81" src="<?php echo get_site_url(); ?>/wp-content/uploads/2018/10/LCFDS-NEWS-1-08.10.18-150x150.jpg" class="attachment-112x81 size-112x81 wp-post-image" alt="" srcset="<?php echo get_site_url(); ?>/wp-content/uploads/2018/10/LCFDS-NEWS-1-08.10.18-150x150.jpg 150w, <?php echo get_site_url(); ?>/wp-content/uploads/2018/10/LCFDS-NEWS-1-08.10.18-60x60.jpg 60w" sizes="(max-width: 81px) 100vw, 81px">								</a>
-                                    </div>
-                                    <div class="related-featured-title">
-                                        <div class="date">October 8, 2018</div>
-                                        <h3>
-                                            <a href="<?php echo get_site_url(); ?>/trading-the-1-minute-scalping-strategy/">
-                                                Trading the 1-minute scalping...									</a>
-                                        </h3>
-                                        <p>Scalping is a popular term...</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="belowheader-blog-right">
-                        <div class="row">
-                            <ul class="related-post bs">
-                                <li>
-                                    <div class="related-featured-img">
-                                        <a href="<?php echo get_site_url(); ?>/the-martingale-strategy-trading-a-negative-progression-system/">
-                                            <img width="81" height="81" src="<?php echo get_site_url(); ?>/wp-content/uploads/2018/10/04.10.18-LCFDS-1-150x150.jpg" class="attachment-112x81 size-112x81 wp-post-image" alt="" srcset="<?php echo get_site_url(); ?>/wp-content/uploads/2018/10/04.10.18-LCFDS-1-150x150.jpg 150w, <?php echo get_site_url(); ?>/wp-content/uploads/2018/10/04.10.18-LCFDS-1-60x60.jpg 60w" sizes="(max-width: 81px) 100vw, 81px">								</a>
-                                    </div>
-                                    <div class="related-featured-title">
-                                        <div class="date">October 4, 2018</div>
-                                        <h3>
-                                            <a href="<?php echo get_site_url(); ?>/the-martingale-strategy-trading-a-negative-progression-system/">
-                                                The Martingale strategy: Trading...									</a>
-                                        </h3>
-                                        <p>Traders looking to improve their...</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="belowheader-blog-right">
-                        <div class="row">
-                            <ul class="related-post bs">
-                                <li>
-                                    <div class="related-featured-img">
-                                        <a href="<?php echo get_site_url(); ?>/trading-chart-patterns-the-dead-cat-bounce/">
-                                            <img width="81" height="81" src="<?php echo get_site_url(); ?>/wp-content/uploads/2018/10/03.10.18-LCFDS-150x150.jpg" class="attachment-112x81 size-112x81 wp-post-image" alt="" srcset="<?php echo get_site_url(); ?>/wp-content/uploads/2018/10/03.10.18-LCFDS-150x150.jpg 150w, <?php echo get_site_url(); ?>/wp-content/uploads/2018/10/03.10.18-LCFDS-60x60.jpg 60w" sizes="(max-width: 81px) 100vw, 81px">								</a>
-                                    </div>
-                                    <div class="related-featured-title">
-                                        <div class="date">October 3, 2018</div>
-                                        <h3>
-                                            <a href="<?php echo get_site_url(); ?>/trading-chart-patterns-the-dead-cat-bounce/">
-                                                Trading chart patterns: The...									</a>
-                                        </h3>
-                                        <p>The use of technical analysis...</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="belowheader-blog-right">
-                        <div class="row">
-                            <ul class="related-post bs">
-                                <li>
-                                    <div class="related-featured-img">
-                                        <a href="<?php echo get_site_url(); ?>/analyzing-the-divergence-of-indicators/">
-                                            <img width="81" height="81" src="<?php echo get_site_url(); ?>/wp-content/uploads/2018/09/forex-3-150x150.jpg" class="attachment-112x81 size-112x81 wp-post-image" alt="" srcset="<?php echo get_site_url(); ?>/wp-content/uploads/2018/09/forex-3-150x150.jpg 150w, <?php echo get_site_url(); ?>/wp-content/uploads/2018/09/forex-3-60x60.jpg 60w" sizes="(max-width: 81px) 100vw, 81px">								</a>
-                                    </div>
-                                    <div class="related-featured-title">
-                                        <div class="date">September 26, 2018</div>
-                                        <h3>
-                                            <a href="<?php echo get_site_url(); ?>/analyzing-the-divergence-of-indicators/">
-                                                Analyzing the divergence of...									</a>
-                                        </h3>
-                                        <p>Trading signals are often spread...</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                } else {
+                        
+                }?>
+
+                <?php 
+                wp_reset_postdata(); ?>
             </div>
         </div>
         <div class="space-60"></div>
@@ -318,11 +232,10 @@ get_header(); ?>
                     'category_name' => 'book-reviews',
                     'posts_per_page' => '5',
                 );
-                // запрос
+                
                 $query = new WP_Query($args);
                 $i = 0;
 
-                // Цикл
                 if ($query->have_posts()) {
                     while ($query->have_posts()) {
                         $query->the_post();
@@ -337,10 +250,10 @@ get_header(); ?>
                         }
                     }
                 } else {
-                        // Постов не найдено
+                        
                     }?>
                             </div>
-            <?php // Возвращаем оригинальные данные поста. Сбрасываем $post.
+            <?php 
                 wp_reset_postdata(); ?>
             </div>
         <div class="space-60"></div>

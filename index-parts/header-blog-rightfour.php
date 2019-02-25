@@ -1,9 +1,9 @@
 <div class="row">
     <div class="has-mask">
-
-            <a href="<?php echo get_permalink() ?>" class="blog-featured-img">
-                <img width="409" height="283" alt="<?php echo get_the_title()?>" src="<?php echo the_post_thumbnail_url('large');?>">
-            </a>
+        <a href="<?php echo get_permalink() ?>" class="blog-featured-img">
+            <img width="409" height="283" alt="<?php echo get_the_title() ?>"
+                 src="<?php echo the_post_thumbnail_url('large'); ?>">
+        </a>
         <div class="hover-content">
             <div class="date"><?php the_time('F j, Y') ?></div>
             <h3>

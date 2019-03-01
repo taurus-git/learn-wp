@@ -3,8 +3,8 @@
  * Template Name: Home page template
  */
 get_header(); ?>
-    <main class="main-wrapper">
-        <div class="main-banner">
+<main class="main-wrapper">
+    <div class="main-banner">
             <img src="<?php echo get_site_url(); ?>/wp-content/uploads/2018/11/banner.png" alt="banner">
             <div class="banner-content">
                 <div class="wrapper">
@@ -14,8 +14,8 @@ get_header(); ?>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="banner-section-green">
+    </div>
+    <div class="banner-section-green">
             <div class="wrapper">
                 <div class="row">
                     <div id="banner-carousel" class="owl-carousel owl-theme">
@@ -113,7 +113,7 @@ get_header(); ?>
                 </div>
             </div>
         </div>
-        <div class="top-banners wrapper">
+    <div class="top-banners wrapper">
             <div class="title-row float-none">
                 <div class="row">
                     <div class="div100">
@@ -160,9 +160,9 @@ get_header(); ?>
                 wp_reset_postdata(); ?>
                             </div>
         </div>
-        <div class="space-60"></div>
-        <div class="top-articles wrapper">
-            <div class="title-row float-none">
+    <div class="space-60"></div>
+    <div class="top-articles wrapper">
+        <div class="title-row float-none">
                 <div class="row">
                     <div class="div100">
                         <div class="title-divider"></div>
@@ -171,7 +171,7 @@ get_header(); ?>
                     </div>
                 </div>
             </div>
-            <div class="cols-row">
+        <div class="cols-row">
                 <?php
                 $args = array(
                     'order' => 'DESC',
@@ -179,7 +179,7 @@ get_header(); ?>
                     'posts_per_page' => '6',
                     'offset'         => "5",
                 );
-                
+
                 $query = new WP_Query($args);
                 $i = 0;
 
@@ -210,9 +210,10 @@ get_header(); ?>
                 <?php
                 wp_reset_postdata(); ?>
             </div>
-        </div>
-        <div class="space-60"></div>
-        <div class="top-book_reviews wrapper">
+            </div>
+    </div>
+    <div class="space-60"></div>
+    <div class="top-book_reviews wrapper">
             <div class="title-row float-none">
                 <div class="row">
                     <div class="div100">
@@ -229,7 +230,7 @@ get_header(); ?>
                     'category_name' => 'book-reviews',
                     'posts_per_page' => '5',
                 );
-                
+
                 $query = new WP_Query($args);
                 $i = 0;
 
@@ -247,7 +248,7 @@ get_header(); ?>
                     }
                 } ?>
                             </div>
-            <?php 
+            <?php
                 wp_reset_postdata(); ?>
             </div>
         <div class="space-60"></div>
@@ -299,5 +300,6 @@ get_header(); ?>
             </div>
         </div>
         <div class="space-60"></div>
-    </main>
+    </div>
+</main>
 <?php get_footer(); ?>

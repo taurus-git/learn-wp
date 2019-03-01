@@ -10,7 +10,9 @@
                             'height' => '81'
                         );
                         $default_attr = array(
-                            'src' => wp_get_attachment_image_src(get_post_thumbnail_id(), 'thumbnail'),
+                            $attachment_id = get_post_thumbnail_id(),
+                            $image_attributes = wp_get_attachment_image_src( $attachment_id ),
+                                'src'       => $image_attributes[0],
                         );
                         echo the_post_thumbnail( $size, $default_attr ); ?>
                     </a>
@@ -21,7 +23,7 @@
                         <a href="<?php echo get_permalink() ?>">
                             <?php echo wp_trim_words(get_the_title(), 4); ?> </a>
                     </h3>
-                    <p><?php the_excerpt(); ?></p>
+                    <?php the_excerpt(); ?>
                 </div>
             </li>
         </ul>
